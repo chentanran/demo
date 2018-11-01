@@ -84,6 +84,14 @@
 //   console.log(ch.codePointAt(0).toString(16));
 // }
 
-for(let add of "hello"){
-    console.log(add);
-}
+// for(let add of "hello"){
+//     console.log(add);
+// }
+
+
+let a = 10;
+
+let b = `"hello ${a}"`;
+
+
+console.log(b)

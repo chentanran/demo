@@ -5,11 +5,11 @@ function $require(url){
 
     const fileName = path.join(__dirname,url);
 
-    $require.cache = $require.cache || {};
+    // $require.cache = $require.cache || {};
 
-    if($require.cache[filename]){
-        return $require.cache[filename].exports;
-    }
+    // if($require.cache[filename]){
+    //     return $require.cache[filename].exports;
+    // }
 
     const filePath = __dirname;
 
@@ -26,7 +26,7 @@ function $require(url){
 
     eval(code);
 
-    $require.cache[filename] = module;
+    // $require.cache[filename] = module;
 
     return module.exports;
 }
