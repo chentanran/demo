@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+    字符串:
+        includes()：返回布尔值，表示是否找到了参数字符串。
+        startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。
+        endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。
+            这三个方法都支持第二个参数，表示开始搜索的位置。
+
+        repeat方法返回一个新字符串，表示将原字符串重复n次。
+            参数如果是小数，会被取整
+            如果repeat的参数是负数或者Infinity，会报错
+            如果参数是 0 到-1 之间的小数，则等同于 0
+            参数NaN等同于 0
+            如果repeat的参数是字符串，则会先转换成数字
+
+        padStart()，padEnd()  
+             如果某个字符串不够指定长度，会在头部或尾部补全。padStart()用于头部补全，padEnd()用于尾部补全。
+             padStart和padEnd一共接受两个参数，第一个参数用来指定字符串的最小长度，第二个参数是用来补全的字符串。
+             如果原字符串的长度，等于或大于指定的最小长度，则返回原字符串。
+             如果用来补全的字符串与原字符串，两者的长度之和超过了指定的最小长度，则会截去超出位数的补全字符串
+             如果省略第二个参数，默认使用空格补全长度。
+             padStart的常见用途是为数值补全指定位数
+        
+        String.raw方法，往往用来充当模板字符串的处理函数，返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串，
+            对应于替换变量后的模板字符串。
+
+        字符串对象共有 4 个方法，可以使用正则表达式：match()、replace()、search()和split()。
+
+    正则:
+        u修饰符，含义为“Unicode 模式”，用来正确处理大于\uFFFF的 Unicode 字符
+        y修饰符，叫做“粘连”（sticky）修饰符。
+        sticky属性，表示是否设置了y修饰符。  y
+        unicode属性，表示是否设置了u修饰符。 u
+        flags属性，会返回正则表达式的修饰符。 i g ...
+        source属性,返回正则表达式的正文
+        s修饰符，使得.可以匹配任意单个字符。 s
+        dotAll属性，返回一个布尔值，表示该正则表达式是否处在dotAll模式。  查看s是否存在
+        \p{...}和\P{...}，允许正则表达式匹配符合 Unicode 某种属性的所有字符。
+            \P{…}是\p{…}的反向匹配，即匹配不满足条件的字符。
+            使用的时候一定要加上u修饰符。如果不加u修饰符，正则表达式使用\p和\P会报错
+            \p{Number}甚至能匹配罗马数字。
+        具名组匹配（Named Capture Groups），允许为每一个组匹配指定一个名字
+            const RE_DATE = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+                    const matchObj = RE_DATE.exec('1999-12-31');
+                    const year = matchObj.groups.year; // 1999
+                    const month = matchObj.groups.month; // 12
+                    const day = matchObj.groups.day; // 31
+            要在正则表达式内部引用某个“具名组匹配”，可以使用\k<组名>的写法。  
+                const RE_TWICE = /^(?<word>[a-z]+)!\1$/;
+                const RE_TWICE = /^(?<word>[a-z]+)!\k<word>!\1$/;
+    
+    数值:
+        Number.isFinite()用来检查一个数值是否为有限的（finite），即不是Infinity。
+            如果参数类型不是数值，Number.isFinite一律返回false。
+        Number.isNaN()用来检查一个值是否为NaN。
+            如果参数类型不是NaN，Number.isNaN一律返回false
+            它们与传统的全局方法isFinite()和isNaN()的区别在于，传统方法先调用Number()将非数值的值转为数值，
+                再进行判断，而这两个新方法只对数值有效，Number.isFinite()对于非数值一律返回false,
+                 Number.isNaN()只有对于NaN才返回true，非NaN一律返回false。
+        Number.parseInt(), Number.parseFloat()
+                    和 parseInt() . parseFloat() 完全相等, 为了实现模块化,逐步减少全局方法
+        Number.isInteger()用来判断一个数值是否为整数。
+        Number.EPSILON。根据规格，它表示 1 与大于 1 的最小浮点数之间的差。
+            Number.EPSILON的实质是一个可以接受的最小误差范围
+        Number.MAX_SAFE_INTEGER和Number.MIN_SAFE_INTEGER这两个常量，用来表示这个范围的上下限。
+            Number.MAX_SAFE_INTEGER === 9007199254740991
+            Number.MIN_SAFE_INTEGER === -9007199254740991
+        Number.isSafeInteger()则是用来判断一个整数是否落在这个范围之内
+    
+    Math:
+        Math.trunc方法用于去除一个数的小数部分，返回整数部分
+            对于非数值，Math.trunc内部使用Number方法将其先转为数值
+            对于空值和无法截取整数的值，返回NaN。
+            Math.trunc = Math.trunc || function(x) {
+                return x < 0 ? Math.ceil(x) : Math.floor(x);
+              };
+        Math.sign方法用来判断一个数到底是正数、负数、还是零。对于非数值，会先将其转换为数值
+            参数为正数，返回+1；
+            参数为负数，返回-1；
+            参数为 0，返回0；
+            参数为-0，返回-0;
+            其他值，返回NaN
+        Math.cbrt方法用于计算一个数的立方根。
+        Math.clz32方法返回一个数的 32 位无符号整数形式有多少个前导 0。
+            左移运算符（<<）
+                Math.clz32(1 << 1) // 30
+                Math.clz32(1 << 2) // 29
+                Math.clz32(1 << 29) // 2
+        Math.imul方法返回两个数以 32 位带符号整数形式相乘的结果，返回的也是一个 32 位的带符号整数
+            对于那些很大的数的乘法，低位数值往往都是不精确的，Math.imul方法可以返回正确的低位数值
+            Math.imul(2, 4)   // 8
+            Math.imul(-1, 8)  // -8
+            Math.imul(-2, -2) // 4
+        Math.fround方法返回一个数的32位单精度浮点数形式。
+            将64位双精度浮点数转为32位单精度浮点数。如果小数的精度超过24个二进制位，
+                返回值就会不同于原值，否则返回值不变（即与64位双精度值一致）。
+                Math.fround(2 ** 24)       // 16777216
+                Math.fround(2 ** 24 + 1)   // 16777216
+        Math.hypot方法返回所有参数的平方和的平方根
+            Math.hypot(3, 4);        // 5
+            Math.hypot(3, 4, 5);     // 7.0710678118654755
+        指数运算符（**）:
+            这个运算符的一个特点是右结合，而不是常见的左结合。多个指数运算符连用时，是从最右边开始计算的
+            指数运算符可以与等号结合，形成一个新的赋值运算符（**=）
+
+    函数:
+        ES6 允许为函数的参数设置默认值，即直接写在参数定义的后面。
+            function log(x, y = 'World') {
+                console.log(x, y);
+              }
+              log('Hello') // Hello World
+              log('Hello', 'China') // Hello China
+              log('Hello', '') // Hello
+
+              function Point(x = 0, y = 0) {  //参数变量是默认声明的，所以不能用let或const再次声明。
+                this.x = x;
+                this.y = y;
+              }
+              const p = new Point();
+              p // { x: 0, y: 0 }
+
+            在函数体中，不能用let或const再次声明，否则会报错。
+                let x = 99;
+                function foo(p = x + 1) {
+                  console.log(p);
+                }
+                foo() // 100
+                x = 100;
+                foo() // 101
+
+            参数默认值可以与解构赋值的默认值，结合起来使用。
+                function foo({x, y = 5}) {
+                console.log(x, y);
+                }
+                foo({}) // undefined 5
+                foo({x: 1}) // 1 5
+                foo({x: 1, y: 2}) // 1 2
+                foo() // TypeError: Cannot read property 'x' of undefined
+
+                如果函数foo调用时没提供参数，变量x和y就不会生成，从而报错。通过提供函数参数的默认值，就可以避免这种情况
+                如果没有提供参数，函数foo的参数默认为一个空对象
+                function foo({x, y = 5} = {}) {
+                    console.log(x, y);
+                  }
+                  foo() // undefined 5
+
+                  写法一函数参数的默认值是空对象，但是设置了对象解构赋值的默认值；
+                  写法二函数参数的默认值是一个有具体属性的对象，但是没有设置对象解构赋值的默认值。
+                  // 写法一
+                    function m1({x = 0, y = 0} = {}) {
+                      return [x, y];
+                    }
+                    
+                    // 写法二
+                    function m2({x, y} = { x: 0, y: 0 }) {
+                      return [x, y];
+                    }
+                    // 函数没有参数的情况
+                    m1() // [0, 0]
+                    m2() // [0, 0]
+                                    
+                    // x 和 y 都有值的情况
+                    m1({x: 3, y: 8}) // [3, 8]
+                    m2({x: 3, y: 8}) // [3, 8]
+                                    
+                    // x 有值，y 无值的情况
+                    m1({x: 3}) // [3, 0]
+                    m2({x: 3}) // [3, undefined]
+                                    
+                    // x 和 y 都无值的情况
+                    m1({}) // [0, 0];
+                    m2({}) // [undefined, undefined]
+                                    
+                    m1({z: 3}) // [0, 0]
+                    m2({z: 3}) // [undefined, undefined]
+
+                 如果传入undefined，将触发该参数等于默认值，null则没有这个效果。
+
+                 length属性的返回值，等于函数的参数个数减去指定了默认值的参数个数
+                 length属性的含义是，该函数预期传入的参数个数。某个参数指定默认值以后，
+                    预期传入的参数个数就不包括这个参数了。同理，后文的 rest 参数也不会计入length属性。
+    </pre>
+</body>
+</html>
