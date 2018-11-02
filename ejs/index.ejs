@@ -12,6 +12,9 @@
     <p>年龄 <%= age %></p>
     <% hobby.forEach(item => { %>
         <p> <%= item %></p>
-        <% }) %>
+    <% }) %>
+    <% for(let i = 0; i < hobby.length; i++) { %>
+        <p> <%= hobby[i] %></p>
+    <% } %>
 </body>
 </html>
