@@ -53,14 +53,19 @@
 
 // console.log(foo());
 
-function foo() {
-  console.log(this.id)
-  setTimeout(() => {
-    console.log('id:', this.id);
-  }, 100);
-}
+// function foo() {
+//   console.log(this.id)
+//   setTimeout(() => {
+//     console.log('id:', this.id);
+//   }, 100);
+// }
 
-var id = 21;
+// var id = 21;
 
-foo.call({ id: 42 });
-// id: 42
+// foo.call({ id: 42 });
+// // id: 42
+
+// let foo = {};
+// end = () => 20;
+
+// foo::end;
