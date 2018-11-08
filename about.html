@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="/css/1.css">
+  <!-- <link rel="stylesheet" href="/css/1.css"> -->
 
 </head>
 
@@ -26,5 +26,18 @@
 </body>
 <script>
   // alert(.4 * .2);
+
+  let a = {};
+  a['b'] = "c";
+  a['c'] = 'd';
+  a['d'] = 'e';
+
+  let obj = {x: 10};
+
+  // Object.setPrototypeOf(obj, a);
+
+  console.log(Object.keys(obj))
+  console.log(Object.values(obj))
+  console.log(Object.entries(obj))
 </script>
 </html>
