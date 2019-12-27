@@ -133,5 +133,27 @@ function throttle(fn, delay) {
 
 will-change: transform;  这行代码能够开启 GPU 加速页面渲染，从而大大降低了 CPU 的负载压力，达到优化页面渲染性能的目的
 
+### Array.reduce
+```javascript
+  var words = ['one', 'two', 'three'];
+    var numbers = [6.1, 4.2, 6.3];
+    var groupBy = function (arr, criteria) {
+      return arr.reduce(function (obj, item) {
+        // 判断criteria是函数还是属性名
+        var key = typeof criteria === 'function' ? criteria(item) : item[criteria];
+        // 如果属性不存在，则创建一个
+        if (!obj.hasOwnProperty(key)) {
+          obj[key] = [];
+        }
+        // 将元素加入数组
+        obj[key].push(item);
+        // 返回这个对象
+        return obj;
+      }, {});
+    };
+    
+    console.log(JSON.stringify(groupBy(words, 'length'))) // {"3":["one","two"],"5":["three"]}
+    console.log(JSON.stringify(groupBy(numbers, Math.floor))) // {"4":[4.2],"6":[6.1,6.3]}
+```
 
 
