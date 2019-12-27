@@ -131,32 +131,7 @@ function throttle(fn, delay) {
   Array.from(img).forEach(item => observer.observe(item));
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+will-change: transform;  这行代码能够开启 GPU 加速页面渲染，从而大大降低了 CPU 的负载压力，达到优化页面渲染性能的目的
 
 
 
